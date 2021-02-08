@@ -48,10 +48,9 @@ let urlSchema=new mongoose.Schema({
 },{collection: 'urls'})
 
 let Url=mongoose.model('Url', urlSchema)
-let resp={}// 
+let resp={}
 
-//https://www.freecodecamp.org
-//https://www.google.com
+
 app.post('/api/shorturl/new',bodyParser.urlencoded({extended: false}),(request, response)=>{
   let urlInput=request.body['url']
   dns.lookup(urlParser.parse(urlInput).hostname, (error, address)=>{
@@ -80,16 +79,15 @@ app.post('/api/shorturl/new',bodyParser.urlencoded({extended: false}),(request, 
 
 
 
-app.get('/api/shorturl/:input',(request, response)=>{
+app.get('/:input',(request, response)=>{
   let input=request.params.input
-  console.log(input)
+  //console.log(input)
   Url.find({shortened: input}, (error,data)=>{
     if( error || data===[]){
       response.json({error: "Invalid URL"})
     } else{
       let original=data[0]
       original=original.original
-      console.log(original)
       response.redirect(original)
 
     }
