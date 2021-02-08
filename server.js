@@ -10,7 +10,7 @@ let dns=require('dns')
 
 
 // Basic Configuration
-const port = /*process.env.PORT ||*/ 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 
@@ -37,7 +37,7 @@ app.listen(port, function() {
 
 
 let uri=process.env.DB_URI;
-console.log(process.env.PWD)
+
 
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
